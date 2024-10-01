@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dental ejucation</title>
+
+    <link href="assets/css/bootstrap.rtl.css" rel="stylesheet" />
+    <link href="assets/css/mystyle.css" rel="stylesheet" />
+    <script src="assets/javascript/jquery-3.7.1.min.js" ></script>
+    <script src="assets/javascript/bootstrap.min.js" ></script>
+</head>
+<body>
+    <div class="container">
+ 
+
+        <div class="row">
+
+
+          <div class="col-md">
+            <div class="alert alert-light" role="alert">
+                <div class="d-flex flex-row align-content-around">
+                <div class="col" >
+                    <div>
+               باقی‌مانده
+                    </div>
+               <span class="badge text-bg-primary" id="wholeAnswer">17</span>
+            </div> 
+                <div class="col" >
+                    <div>
+                    درست 
+                    </div>
+                    <div class="badge text-bg-success" id="trueAnswer">0</div>
+                     </div> 
+                <div class="col" >
+                    <div>
+                        غلط
+                    </div>
+                        <div class="badge text-bg-danger" id="falseAnswer">0</div>
+                </div> 
+            </div>
+              </div>
+          </div>
+          <div class="col-md-3">
+            <div class="text-center">
+            <div class="card border-primary mb-3" style="max-width: 18rem;margin:0 auto;">
+                <div class="card-header text-center">ناحیه مورد نظر</div>
+                <div class="card-body text-primary">
+                  <h5 class="card-title"></h5>
+                  <p class="card-text text-center" id="gameStageName">
+                </p>
+                </div>
+              </div>
+            </div>
+          </div>
+         
+          <div class="col-md">
+            <div class="alert alert-light" role="alert">
+                <div class="d-flex flex-row align-content-around">
+                    <div class="col">
+
+                <div id="timer" class="col-12" style="direction: ltr;font-size: 24px;font-weight: bold;text-align: center;">
+                    <div class="clock-wrapper">
+                        <span class="hours">00</span>
+                        <span class="dots">:</span>
+                        <span class="minutes">00</span>
+                        <span class="dots">:</span>
+                        <span class="seconds">00</span>
+                    </div>
+                
+                  </div>
+                </div>
+                <div class="col">
+                  <button type="button" class="btn btn-primary" onclick="location.reload()">دوباره</button>
+                </div>
+                </div>
+
+            </div>
+            
+          </div>
+          
+        </div>
+        <div style="text-align: center;">
+            <audio id="audioCorrect">
+                <source src="assets/voice/correct.mp3" type="audio/mpeg">
+              </audio>
+              <audio id="audioWrong">
+                <source src="assets/voice/wrong.mp3" type="audio/mpeg">
+              </audio>
+
+        <div class="container-sp" style="margin: 0 auto;">
+            <img src="./assets/image/0nZXNeqUpLJ.png" alt="Sample Image">
+            
+            <!-- Markers on the image -->
+            <div class="marker marker1" data-tooltip="Porion (P)"></div>
+            <div class="marker marker2" data-tooltip="Bolton (Bo)"></div>
+            <div class="marker marker3" data-tooltip="Sella Turcica (S)"></div>
+            <div class="marker marker4"  data-tooltip="Condylion (Co)"></div>
+            <div class="marker marker5" data-tooltip="Gonion (Go)"></div>
+            <div class="marker marker6" data-tooltip="Posterior Nasal Spine (PNS)"></div>
+            <div class="marker marker7" data-tooltip="B-point"></div>
+            <div class="marker marker8" data-tooltip="Pogonion (Pog)"></div>
+            <div class="marker marker9" data-tooltip="Gnathion (Gn)"></div>
+            <div class="marker marker10" data-tooltip="Menton (Me)"></div>
+            <div class="marker marker11" data-tooltip="Basion (Ba)"></div>
+            <div class="marker marker12" data-tooltip="Nasion (Na)"></div>
+            <div class="marker marker13" data-tooltip="Orbitale (Or)"></div>
+            <div class="marker marker14" data-tooltip="Anterior Nasal Spine (ANS)"></div>
+            <div class="marker marker15" data-tooltip="A point"></div>
+            <div class="marker marker16" data-tooltip="PT point"></div>
+            <div class="marker marker17" data-tooltip="Upper Lip (UL)"></div>
+            <div class="marker marker18" data-tooltip="Lower Lip (LL)"></div>
+
+
+            <div  id="spetialLines">
+                <div class="line line1" style="display: none;" data-line="SN"></div>
+                <div class="line line2" style="display: none;" data-line="Frankfort(po-or)"></div>
+                <div class="line line3" style="display: none;"    data-line="Palatial plan(PNS-ANS)"></div>
+                
+                <div class="line line4" style="display: none;" data-line="Anatomical Occlusal plan"></div>
+
+                <div class="line line5" style="display: none;" data-line="Mandibular plan(Go-Gn)"></div>
+                <div class="line line6" style="display: none;" data-line="Facial plan"></div>
+                <div class="line line7" style="display: none;" data-line="NA"></div>
+                <div class="line line8" style="display: none;" data-line="NB"></div>
+                <div class="line line9" style="display: none;" data-line="N-perp"></div>
+
+                <div class="line line10" style="display: none;" data-line="S-Gn"></div>
+                <div class="line line11" style="display: none;" data-line="ANS-Me"></div>
+                <div class="line line12" style="display: none;" data-line="N-Me"></div>
+                    
+                    
+               </div>
+            <style>
+                .line {
+                    position: absolute;
+                    
+                    height: 5px;
+                    background-color: #47d12e;
+                    transform-origin: left center;
+                    
+                    border: 1px solid;
+                    z-index: 2;
+  
+                    }
+
+                    .line1{
+                     top: 27.4%;
+                    left: 53%;
+                    width: 31.3%;
+                    transform: rotate(-17deg);
+                    }
+                    .line2{
+                        top: 34%;
+                        left: 41%;
+                        width: 37.3%;
+                        transform: rotate(0deg);
+                    }
+                    .line3{
+                        top: 50.3%;
+                        left: 42.3%;
+                        width: 45.3%;
+                        transform: rotate(-4.7deg);
+                    }
+                    .line4{
+                        top: 44.3%;
+                        left: 45.3%;
+                        width: 49.3%;
+                        transform: rotate(19.3deg);
+                    }
+
+                    .line5{
+                        top: 68.3%;
+                        left: 52.3%;
+                        width: 34.3%;
+                        transform: rotate(19.3deg);
+                    }
+                    .line6{
+                        top: 15%;
+                        left: 83.1%;
+                        width: 51.3%;
+                        transform: rotate(87deg);
+                    }
+                    .line7{
+                        top: 15%;
+                        left: 83.1%;
+                        width: 28.3%;
+                        transform: rotate(86deg);
+                    }
+
+                    .line8{
+                        top: 15%;
+                        left: 83.1%;
+                        width: 44.3%;
+                        transform: rotate(89deg);
+                    }
+                    .line9{
+                        top: 15%;
+                        left: 83.1%;
+                        width: 17%;
+                        transform: rotate(90deg);
+                    }
+                    .line10{
+                        top: 28%;
+                        left: 53%;
+                        width: 53.3%;
+                        transform: rotate(53.8deg);
+                    }
+                    .line11{
+                        top: 46%;
+                        left: 87.1%;
+                        width: 30.3%;
+                        transform: rotate(99.5deg);
+                    }
+                    .line12{
+                        top: 16%;
+                            left: 83.5%;
+                            width: 53.3%;
+                            transform: rotate(92deg);
+                    }
+
+
+
+                    
+            </style>
+            
+
+
+        
+            <!-- Tooltip -->
+            <div class="tooltip-sp" id="tooltip-sp"></div>
+        </div>
+        </div>
+        <style>
+            .form-check-input[type="radio"] {
+              appearance: none;
+              -webkit-appearance: none;
+              width: 20px;
+              height: 20px;
+              border: 2px solid #adb5bd;
+              border-radius: 0; /* برای مربعی شدن */
+              margin-left: 10px;
+            }
+        
+            .form-check-input[type="radio"]:checked {
+              background-color: #0d6efd; /* رنگ آبی برای انتخاب شده */
+              border-color: #0d6efd;
+            }
+        
+            /* حالت درست و غلط */
+            .correct {
+              background-color: green !important;
+              border-color: green !important;
+            }
+        
+            .incorrect {
+              background-color: red !important;
+              border-color: red !important;
+            }
+        
+            #nextBtn {
+              display: none; /* مخفی کردن دکمه سوال بعدی تا وقتی جواب داده شود */
+            }
+          </style>
+        <div class="container mt-4" id="secondGame" style="display: none;">
+            <!-- سوال -->
+            <div class="card">
+              <div class="card-body">
+                <h5 id="questionTitle" class="card-title">سوال</h5>
+                <!-- گزینه‌ها -->
+                <form id="quizForm">
+                  <div id="optionsContainer"></div>
+                  <!-- دکمه تایید -->
+                  <button type="button" class="btn btn-primary mt-3" id="submitBtn">ارسال جواب</button>
+                  <!-- دکمه سوال بعدی -->
+                  <button type="button" class="btn btn-secondary mt-3" id="nextBtn">سؤال بعدی</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        
+          <!-- جاوااسکریپت بوت‌استرپ و jQuery -->
+          <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+          <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        
+          <!-- اسکریپت برای تغییر سوال و جواب -->
+          <script>
+            function getRandomIndex(excludedIndex) {
+                let randomIndex;
+
+                do {
+                    // Generate a random index between 1 and 18 (inclusive)
+                    randomIndex = Math.floor(Math.random() * 12) ;
+                } while (randomIndex === excludedIndex);  // Repeat if the generated number is the excluded one
+
+                return randomIndex;
+            }
+
+            const lineValues=["SN","Frankfort(po-or)","Palatial plan(PNS-ANS)","4-Anatomical Occlusal plan",
+                        "Mandibular plan(Go-Gn)","Facial plan","NA","NB","N-perp","S-Gn","ANS-Me","N-Me"];
+            function getRandomIndices(excludedIndex) {
+                   
+                   let indices =[];
+                  var index=0;
+                   do {
+                       let randomIndex = Math.floor(Math.random() * 12);  // Generate a random index between 0 and 11
+ 
+                      
+                       if (randomIndex !== excludedIndex  && !indices.includes(randomIndex)) {
+                           indices.push(randomIndex);
+                       }
+                       else{
+                        index--;
+                       }
+                       index++;
+                   }while( index < 4)
+ 
+                   return indices;  // Convert the set to an array
+               }
+
+             
+
+            function generateTrueFalse(){
+            
+                let arr = [false, false, false, false];  // Initialize array with all `false`
+                
+                // Generate a random index between 0 and 3
+                let randomIndex = Math.floor(Math.random() * 4);
+                
+                // Set one element to `true` at the random index
+                arr[randomIndex] = true;
+                
+                return arr;
+            }
+
+            
+            var appendArray="";
+           const ccc =$.each(lineValues, function(key, value){
+            var  trueFlase=generateTrueFalse();
+            var getRandomIndice=getRandomIndices(key)
+            
+             appendArray+=' {'  +
+                ' "question": "خط مشخص شده در تصویر کدام است؟",' +
+                ' "options": [ ' +
+                '  { "text":"' + (trueFlase[0] ==true ? value : lineValues[getRandomIndice[0]])+ '" , "isCorrect" : '+trueFlase[0] +' },' +
+                 '{"text":"' + (trueFlase[1] ==true ? value : lineValues[getRandomIndice[1]]) +'", "isCorrect": '+trueFlase[1] +' },'+
+                 '{"text":"' + (trueFlase[2] ==true ? value : lineValues[getRandomIndice[2]])+ '", "isCorrect": '+trueFlase[2] +' },' +
+                 '{"text":"' +( trueFlase[3] ==true ? value : lineValues[getRandomIndice[3]]) +'", "isCorrect": '+trueFlase[3] +' }'+
+                 ']},';
+                
+            });
+
+           
+           
+          
+            const questions =JSON.parse('['+appendArray.substring(0,appendArray.length - 1) + ']');
+            //  [
+            //   {
+            //     question: "خط مشخص شده در تصویر کدام است؟",
+            //     options: [
+            //       { text: lineValues[getRandomIndex(0)], isCorrect: false },
+            //       { text: lineValues[getRandomIndex(0)], isCorrect: false },
+            //       { text: lineValues[0], isCorrect: true },
+            //       { text: lineValues[getRandomIndex(0)], isCorrect: false }
+            //     ]
+            //   },
+            //   {
+            //     question: "خط مشخص شده در تصویر کدام است؟",
+            //     options: [
+            //       { text: lineValues[2], isCorrect: false },
+            //       { text: lineValues[1], isCorrect: true },
+            //       { text: lineValues[7], isCorrect: false },
+            //       { text: lineValues[5], isCorrect: false }
+            //     ]
+            //   },
+            //   {
+            //     question: "خط مشخص شده در تصویر کدام است؟",
+            //     options: [
+            //       { text: lineValues[6], isCorrect: false },
+            //       { text: lineValues[2], isCorrect: false },
+            //       { text: lineValues[8], isCorrect: false },
+            //       { text: lineValues[3], isCorrect: true }
+            //     ]
+            //   },
+            //   {
+            //     question: "خط مشخص شده در تصویر کدام است؟",
+            //     options: [
+            //       { text: lineValues[7], isCorrect: false },
+            //       { text: lineValues[3], isCorrect: true },
+            //       { text: lineValues[9], isCorrect: false },
+            //       { text: lineValues[1], isCorrect: false }
+            //     ]
+            //   },
+            // ];
+        
+            let currentQuestionIndex = 0;
+        
+            $(document).ready(function() {
+              loadQuestion();
+              $('#submitBtn').click(function() {
+                const selectedOption = $('input[name="option"]:checked');
+        
+                if (selectedOption.length > 0) {
+                  const isCorrect = selectedOption.val() === "true";
+                  $('input[value="true"]').addClass('correct');
+                  if (!isCorrect) {
+                    selectedOption.addClass('incorrect');
+                  }
+                  $('#nextBtn').show();
+                } else {
+                  alert('لطفاً یک گزینه را انتخاب کنید.');
+                }
+              });
+        
+              $('#nextBtn').click(function() {
+                currentQuestionIndex++;
+                $("#spetialLines").find("div").css("display","none");
+                $("#spetialLines").find("div").eq(currentQuestionIndex).css("display","block");
+
+                if (currentQuestionIndex < questions.length) {
+                  loadQuestion();
+                  $('#nextBtn').hide();
+                } else {
+                  alert("آزمون تمام شد!");
+                }
+              });
+            });
+        
+            function loadQuestion() {
+              // پاک کردن جواب‌های قبلی
+              $('.form-check-input').removeClass('correct incorrect');
+              $('#optionsContainer').empty();
+        
+              const currentQuestion = questions[currentQuestionIndex];
+              $('#questionTitle').text(currentQuestion.question);
+        
+              currentQuestion.options.forEach((option, index) => {
+                $('#optionsContainer').append(`
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="option" id="option${index}" value="${option.isCorrect}">
+                    <label class="form-check-label" for="option${index}">
+                      ${option.text}
+                    </label>
+                  </div>
+                `);
+              });
+            }
+          </script>
+        </div>
+
+
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLongTitle">بازی به اتمام رسید</h5>
+                  <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button> -->
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-light" role="alert">
+                        <div class="d-flex flex-row align-content-around">
+                  
+                        <div class="col" >
+                            <div>
+                            درست 
+                            </div>
+                            <div class="badge text-bg-success" id="finalTrueAnswer">0</div>
+                             </div> 
+                        <div class="col" >
+                            <div>
+                                غلط
+                            </div>
+                                <div class="badge text-bg-danger" id="finalFalseAnswer">0</div>
+                        </div> 
+                    </div>
+                      </div>
+                </div>
+                <div class="modal-footer">
+                  <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+                  <button type="button" class="btn btn-primary" onclick="initSecondGame()">بازی دوم</button>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+      <style>
+        .imgholder{
+            position: relative;
+            background-image: url("./assets/image/0nZXNeqUpLJ.png");
+            background-color: #cccccc; 
+            height: 500px; 
+            background-position: center; 
+            background-repeat: no-repeat; 
+            background-size: cover; 
+            width: 100%;
+        }
+        .imgholder img{
+            position: relative;
+        }
+        .dot{
+            width: 15px;
+            height: 15px;
+            position: absolute;
+            top: 10px;
+            background-color: #1976D2;
+            border-radius: 100%;
+            border: 2px solid #653131;
+        }
+      </style>
+
+
+ <style>
+    
+        .container-sp {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .container-sp img {
+            width: 100%;
+            height: auto;
+        }
+
+        .marker {
+            position: absolute;
+    background-color: #56b0f9;
+    border-radius: 50%;
+    width: 12px;
+    height: 12px;
+    cursor: pointer;
+    border: 2px solid #812222;
+    z-index: 6;
+        }
+
+        /* Example markers */
+        .marker1 {
+            top: 33.4%;
+            left: 40.6%;
+        }
+
+        .marker2 {
+            top: 46%;
+            left: 31.6%;
+        }
+
+        .marker3 {
+            top: 26.8%;
+            left: 51.7%;
+        }
+        .marker4 {
+            top: 41.2%;
+             left: 45.6%;
+        }
+        .marker5 {
+            top: 67%;
+            left: 50.6%;
+        }
+        .marker6 {
+            top: 49%;
+             left: 62.6%;
+        }
+        .marker7 {
+            top: 71%;
+            left: 83.2%;
+        }
+        .marker8 {
+            top: 78%;
+            left: 84.6%;
+        }
+        .marker9 {
+            top: 82%;
+            left: 83.6%;
+        }
+        .marker10 {
+            top: 83.2%;
+            left: 80.9%;
+        }
+        .marker11 {
+            top: 49%;
+            left: 41.8%;
+        }
+        .marker12 {
+            top: 15%;
+            left: 82.1%;
+        }
+        .marker13 {
+            top: 33.2%;
+            left: 76.1%;
+        }
+        .marker14 {
+            top: 45%;
+            left: 86.2%;
+        }
+        .marker15 {
+            top: 49%;
+            left: 84.1%;
+        }
+        .marker16 {
+            top: 35%;
+            left: 57.2%;
+        }
+        .marker17 {
+            top: 55.5%;
+            left: 92.5%;
+        }
+        .marker18{
+            top: 65%;
+            left: 91.5%;
+        }
+        
+        .tooltip-sp {
+            display: none;
+            position: absolute;
+            background-color: #333;
+            color: white;
+            padding: 5px;
+            border-radius: 5px;
+            z-index: 8;
+        }
+   
+ </style>
+    
+<script>
+    
+    $(document).ready(function(){
+
+
+    const measure = $('select#measure')
+    const ammount = $('input#num')
+    const timer = $('#timer')
+    const s = $(timer).find('.seconds')
+    const m = $(timer).find('.minutes')
+    const h = $(timer).find('.hours')
+   
+    const coordinate=['Gonion (Go)',];
+    var seconds = 0
+    var minutes = 0
+    var hours = 0
+
+    var interval = null;
+
+    var clockType = undefined;
+
+    function cronometer() {
+        hasStarted = true
+        interval = setInterval(() => {
+            if (seconds < 59) {
+                seconds++
+                refreshClock()
+            }
+            else if (seconds == 59) {
+                minutes++
+                seconds = 0
+                refreshClock()
+            }
+
+            if (minutes == 60) {
+                hours++
+                minutes = 0
+                seconds = 0
+                refreshClock()
+            }
+
+        }, 1000)
+    }
+    function refreshClock() {
+        $(s).text(pad(seconds))
+        $(m).text(pad(minutes))
+        if (hours < 0) {
+            $(s).text('00')
+            $(m).text('00')
+            $(h).text('00')
+        } else {
+            $(h).text(pad(hours))
+        }
+
+        if (hours == 0 && minutes == 0 && seconds == 0 && hasStarted == true) {
+            hasEnded = true
+            alert('The Timer has Ended !')
+        }
+    }
+
+    function clear(intervalID) {
+        clearInterval(intervalID)
+        console.log('cleared the interval called ' + intervalID)
+    }
+    function pad(d) {
+        return (d < 10) ? '0' + d.toString() : d.toString()
+    }
+    // function getTheName(gameStage){
+    //        $("#gameStageName").html(cephNames[gameStage]);
+    // }
+    // getTheName(0);
+    cronometer();
+});
+$(document).ready(function(){
+
+          nextMarker();
+        
+        // $('.marker').on('mouseenter', function() {
+
+        //     const tooltipText = $(this).data('tooltip');
+        //     $('#tooltip-sp').text(tooltipText).css({
+        //         top: $(this).position().top - 30,
+        //         left: $(this).position().left + 20
+        //     }).fadeIn();
+        // });
+
+        // $('.marker').on('mouseleave', function() {
+        //     $('#tooltip-sp').fadeOut();
+        // });
+      var possibleWrongAnswer=0;
+      $('.marker').on('click', function() {
+         
+            
+            $('#tooltip-sp').fadeOut();
+          const tooltipText= $.trim( $(this).data('tooltip'));
+         const targetvalue=$.trim( $("#gameStageName").text());
+         var wholeAnswer=parseInt( $.trim($("#wholeAnswer").text()));
+         if(tooltipText==targetvalue){
+            if($(this).css("backgroundColor")=='rgb(0, 191, 154)' ){
+
+                nextMarker();
+                return;
+                
+            }else 
+        
+          if($(this).css("backgroundColor")=='rgb(255, 165, 0)')
+         {
+          
+            $(this).css({
+                backgroundColor:'red'
+            });
+            var falseAnswer= parseInt($.trim($("#falseAnswer").text()));
+            $("#falseAnswer").text(falseAnswer+1);
+         }
+         else
+         {
+            $(this).css({
+                backgroundColor:'#00bf9a'
+            });
+            var trueAnswer= parseInt($.trim($("#trueAnswer").text()));
+            $("#trueAnswer").text(trueAnswer+1);
+        }
+            if(parseInt( $("#wholeAnswer").text()) >0 )
+            $("#wholeAnswer").text(wholeAnswer -1);
+            $("#audioCorrect")[0].play();
+            
+            nextMarker();
+            
+         }else{
+            
+            $("#audioWrong")[0].play();
+           if(possibleWrongAnswer < 4){
+            
+            
+            if(possibleWrongAnswer==3){  
+                $('.marker').each( function() {
+                    const tooltipText = $(this).data('tooltip');
+                    if(tooltipText==targetvalue){
+                        $(this).css({
+                            backgroundColor:"orange"
+                        })
+                    }
+                
+                
+                });    
+            
+
+                possibleWrongAnswer=0;
+
+            }
+            possibleWrongAnswer++;
+        }
+           
+          
+
+            
+
+            // $(this).css({
+            //     backgroundColor:'red'
+            // });
+         
+            // var falseAnswer= parseInt($.trim($("#falseAnswer"
+            //     ).text()));
+            //     $("#falseAnswer").text(falseAnswer+1);
+            //     $("#wholeAnswer").text(wholeAnswer -1);
+
+
+         }
+         if(wholeAnswer==0){
+            $("#finalFalseAnswer").text($("#falseAnswer"
+            ).text());
+            $("#finalTrueAnswer").text($("#trueAnswer"
+            ).text());
+            $('#exampleModalCenter').modal('toggle');
+
+            
+         }
+         
+        });
+
+
+
+           
+    });
+
+
+    const pointMark=['Porion (P)','Bolton (Bo)','Sella Turcica (S)','Condylion (Co)','Gonion (Go)','Posterior Nasal Spine (PNS)',
+            ,"B-point", "Pogonion (Pog)","Gnathion (Gn)","Menton (Me)","Basion (Ba)","Nasion (Na)","Orbitale (Or)",
+            'Anterior Nasal Spine (ANS)','A point','PT point','Upper Lip (UL)','Lower Lip (LL)'
+            ];
+
+
+            
+            let usedNumbers = [];
+
+                function getRandomUniqueNumber() {
+                    debugger
+                    if (usedNumbers.length === 19) {
+                        console.log("All numbers have been used.");
+                        return null; // All numbers between 0 and 17 have been used
+                    }
+
+                    let randomNumber;
+                    do {
+                        randomNumber = Math.floor(Math.random() * 18);  // Generate a number between 0 and 17
+                    } while (usedNumbers.includes(randomNumber));  // Keep generating if the number has already been used
+
+                    usedNumbers.push(randomNumber);  // Add the new number to the usedNumbers array
+                   
+                    return randomNumber;
+                }
+
+                console.log(usedNumbers);
+
+
+    function nextMarker(){
+
+        $("#gameStageName").text(pointMark[getRandomUniqueNumber()]);
+
+    }
+    function initSecondGame(){
+      $("#spetialLines").find("div").eq(currentQuestionIndex).css("display","block");
+      $("#secondGame").css("display","block");
+      $('.marker').removeAttr('style');
+      $(".maker").css({"backgroundColor":"#56b0f9"});
+      $('.marker').off('click');  
+      $('#exampleModalCenter').modal('toggle');
+     
+
+    }
+
+
+
+</script>    
+</body>
+</html>
