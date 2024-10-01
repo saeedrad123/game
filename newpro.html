@@ -132,6 +132,30 @@
                     
                     
                </div>
+               <div class="anglesLines">
+                <div class="aglines">
+                <div class="aglines1"  style="display: none;"> 
+                <div class="line line14"  data-line="FMIA"></div>
+                <div class="line line15"  data-line="FMIA"></div>
+                </div>
+                <div class="aglines2" style="display: none;"> 
+                 <div class="line line13"  data-line="FMIA"></div>
+                    <div class="line line14"  data-line="FMIA"></div>
+                </div>
+                <div class="aglines3" style="display: none;"> 
+                        <div class="line line13"  data-line="FMIA"></div>
+                        <div class="line line15"  data-line="FMIA"></div>
+                 </div>
+                </div>
+                
+                <div id="angles">
+                <div class="angle angle3" style="display: none;"></div>
+                <div class="angle angle1" style="display: none;"></div>
+
+                <div class="angle angle2" style="display: none;"></div>
+                </div>
+
+               </div>
             <style>
                 .line {
                     position: absolute;
@@ -221,6 +245,59 @@
                     }
 
 
+                    .line13{
+                        top: 34%;
+                        left: 98.5%;
+                        width: 99.3%;
+                        transform: rotate(180deg);
+                    }
+                    .line14{
+                        top: 25%;
+                        left: 95.5%;
+                        width: 53.3%;
+                        transform: rotate(110deg);
+                    }
+                    .line15{
+                    top: 92%;
+                    left: 91.5%;
+                    width: 105.3%;
+                    transform: rotate(209deg)
+                    }
+                 .angle {
+                    width: 0;
+                    height: 0;
+                 
+                    position: absolute;
+                    z-index: 2;
+                   
+                
+
+                    }
+                   .angle.angle1{
+                    
+                    top: 35%;
+                    right: 7.1%;
+                    transform: rotate(0deg);
+                    border-left: 23px solid transparent;
+                    border-right: 15px solid transparent;
+                    border-top: 35px solid #4397ff;
+                    }
+                    .angle.angle2{
+                        top: 35%;
+                        right: 81.1%;
+                        transform: rotate(0deg);
+                        border-left: 43px solid transparent;
+                        border-right: 5px solid transparent;
+                        border-top: 23px solid #4397ff;
+                    }
+                    .angle.angle3{
+                        top: 76%;
+                        right: 19%;
+                        transform: rotate(0deg);
+                        border-left: 59px solid transparent;
+                        border-right: 14px solid transparent;
+                        border-top: 34px solid #4397ff;
+                    }
 
                     
             </style>
@@ -299,6 +376,8 @@
 
             const lineValues=["SN","Frankfort(po-or)","Palatial plan(PNS-ANS)","4-Anatomical Occlusal plan",
                         "Mandibular plan(Go-Gn)","Facial plan","NA","NB","N-perp","S-Gn","ANS-Me","N-Me"];
+
+            const anglesValue=["IMPA","FMIA","FMA","UP1 to FH","FFF"];            
             function getRandomIndices(excludedIndex) {
                    
                    let indices =[];
@@ -318,7 +397,24 @@
  
                    return indices;  // Convert the set to an array
                }
-
+               function getRandomIndices2(excludedIndex) {
+                   let indices =[];
+                  var index=0;
+                   do {
+                       let randomIndex = Math.floor(Math.random() * 5) ;  // Generate a random index between 0 and 11
+ 
+                      
+                       if (randomIndex !== excludedIndex  && !indices.includes(randomIndex)) {
+                           indices.push(randomIndex);
+                       }
+                       else{
+                        index--;
+                       }
+                       index++;
+                   }while( index < 4)
+ 
+                   return indices;  // Convert the set to an array
+               }
              
 
             function generateTrueFalse(){
@@ -336,11 +432,11 @@
 
             
             var appendArray="";
-           const ccc =$.each(lineValues, function(key, value){
+            const ccc =$.each(lineValues, function(key, value){
             var  trueFlase=generateTrueFalse();
             var getRandomIndice=getRandomIndices(key)
             
-             appendArray+=' {'  +
+            appendArray+=' {'  +
                 ' "question": "خط مشخص شده در تصویر کدام است؟",' +
                 ' "options": [ ' +
                 '  { "text":"' + (trueFlase[0] ==true ? value : lineValues[getRandomIndice[0]])+ '" , "isCorrect" : '+trueFlase[0] +' },' +
@@ -350,11 +446,34 @@
                  ']},';
                 
             });
+          
+            
+
+            var appendArray2="";
+            const ccc2 =$.each(anglesValue, function(key, value){
+                
+            var  trueFlase2=generateTrueFalse();
+            var getRandomIndice2=getRandomIndices2(key);
+
+            appendArray2+=' {'  +
+                ' "question": "زوایه مشخص شده در تصویر کدام است؟",' +
+                ' "options": [ ' +
+                '  { "text":"' + (trueFlase2[0] ==true ? value : anglesValue[getRandomIndice2[0]])+ '" , "isCorrect" : '+trueFlase2[0] +' },' +
+                 '{"text":"' + (trueFlase2[1] ==true ? value : anglesValue[getRandomIndice2[1]]) +'", "isCorrect": '+trueFlase2[1] +' },'+
+                 '{"text":"' + (trueFlase2[2] ==true ? value : anglesValue[getRandomIndice2[2]])+ '", "isCorrect": '+trueFlase2[2] +' },' +
+                 '{"text":"' +( trueFlase2[3] ==true ? value : anglesValue[getRandomIndice2[3]]) +'", "isCorrect": '+trueFlase2[3] +' }'+
+                 ']},';
+                
+            });
 
            
            
           
-            const questions =JSON.parse('['+appendArray.substring(0,appendArray.length - 1) + ']');
+            var questions =JSON.parse('['+appendArray.substring(0,appendArray.length - 1) + ']');
+
+            var question2 =JSON.parse('['+appendArray2.substring(0,appendArray2.length - 1) + ']');
+
+            
             //  [
             //   {
             //     question: "خط مشخص شده در تصویر کدام است؟",
@@ -395,6 +514,7 @@
             // ];
         
             let currentQuestionIndex = 0;
+            let flagThridGame=0;
         
             $(document).ready(function() {
               loadQuestion();
@@ -407,23 +527,69 @@
                   if (!isCorrect) {
                     selectedOption.addClass('incorrect');
                   }
+
+                  if( flagThridGame==1 && currentQuestionIndex==2)
+                    { alert("آزمون تمام شد!");
+                                return;
+                        }
                   $('#nextBtn').show();
                 } else {
                   alert('لطفاً یک گزینه را انتخاب کنید.');
                 }
+               
               });
         
               $('#nextBtn').click(function() {
-                currentQuestionIndex++;
-                $("#spetialLines").find("div").css("display","none");
-                $("#spetialLines").find("div").eq(currentQuestionIndex).css("display","block");
 
-                if (currentQuestionIndex < questions.length) {
+                
+                currentQuestionIndex++;
+                if(flagThridGame==1){
+                    if(currentQuestionIndex==3){
+                        alert("آزمون تمام شد!");
+                        return;
+                    }
+                        
+                $("#spetialLines").find("div").css("display","none");
+
+                  
+               
+                $(".aglines").find(" >div").css("display","none");
+                $(".aglines").find(" >div").eq(currentQuestionIndex).css("display","block");
+
+
+                $("#angles").find(" div").css("display","none");
+                $("#angles").find("div").eq(currentQuestionIndex).css("display","block");
+
+                if (currentQuestionIndex < 3) {
                   loadQuestion();
                   $('#nextBtn').hide();
                 } else {
                   alert("آزمون تمام شد!");
+                
+
+                  
                 }
+
+                }
+                
+                if(flagThridGame==0){
+                $("#spetialLines").find("div").css("display","none");
+                $("#spetialLines").find("div").eq(currentQuestionIndex).css("display","block");
+                if (currentQuestionIndex < questions.length) {
+                  loadQuestion();
+                  $('#nextBtn').hide();
+                } else {
+                    $('#exampleModalCenter2').modal('toggle');
+
+
+                  
+                }
+                }
+                    
+               
+          
+
+           
               });
             });
         
@@ -431,6 +597,7 @@
               // پاک کردن جواب‌های قبلی
               $('.form-check-input').removeClass('correct incorrect');
               $('#optionsContainer').empty();
+              
         
               const currentQuestion = questions[currentQuestionIndex];
               $('#questionTitle').text(currentQuestion.question);
@@ -448,6 +615,7 @@
             }
           </script>
         </div>
+
 
 
         <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -485,6 +653,45 @@
               </div>
             </div>
           </div>
+
+
+
+          <div class="modal fade" id="exampleModalCenter2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLongTitle">بازی به اتمام رسید</h5>
+                  <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button> -->
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-light" role="alert">
+                        <div class="d-flex flex-row align-content-around">
+                            بازی دوم به پایان رسید.
+                        <!-- <div class="col" >
+                            <div>
+                            درست 
+                            </div>
+                            <div class="badge text-bg-success" id="finalTrueAnswer">0</div>
+                             </div> 
+                        <div class="col" >
+                            <div>
+                                غلط
+                            </div>
+                                <div class="badge text-bg-danger" id="finalFalseAnswer">0</div>
+                        </div>  -->
+                    </div>
+                      </div>
+                </div>
+                <div class="modal-footer">
+                  <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+                  <button type="button" class="btn btn-primary" onclick="initThirdGame()">بازی سوم</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
       </div>
       <style>
         .imgholder{
@@ -701,18 +908,18 @@ $(document).ready(function(){
 
           nextMarker();
         
-        // $('.marker').on('mouseenter', function() {
+        $('.marker').on('mouseenter', function() {
 
-        //     const tooltipText = $(this).data('tooltip');
-        //     $('#tooltip-sp').text(tooltipText).css({
-        //         top: $(this).position().top - 30,
-        //         left: $(this).position().left + 20
-        //     }).fadeIn();
-        // });
+            const tooltipText = $(this).data('tooltip');
+            $('#tooltip-sp').text(tooltipText).css({
+                top: $(this).position().top - 30,
+                left: $(this).position().left + 20
+            }).fadeIn();
+        });
 
-        // $('.marker').on('mouseleave', function() {
-        //     $('#tooltip-sp').fadeOut();
-        // });
+        $('.marker').on('mouseleave', function() {
+            $('#tooltip-sp').fadeOut();
+        });
       var possibleWrongAnswer=0;
       $('.marker').on('click', function(e) {
          
@@ -725,6 +932,8 @@ $(document).ready(function(){
          const targetvalue=$.trim( $("#gameStageName").text());
          var wholeAnswer=parseInt( $.trim($("#wholeAnswer").text()));
          if(tooltipText==targetvalue){
+                
+
             if($(this).css("backgroundColor")=='rgb(0, 191, 154)' ){
 
                 nextMarker();
@@ -756,6 +965,17 @@ $(document).ready(function(){
             nextMarker();
             
          }else{
+
+          const tooltipText = $(this).data('tooltip');
+            $('#tooltip-sp').text(tooltipText).css({
+                top: $(this).position().top - 30,
+                left: $(this).position().left + 20
+            }).fadeIn().delay(500).fadeOut();
+            
+
+           
+
+
             
             $("#audioWrong")[0].play();
            if(possibleWrongAnswer < 4){
@@ -823,7 +1043,7 @@ $(document).ready(function(){
             let usedNumbers = [];
 
                 function getRandomUniqueNumber() {
-                    debugger
+                    
                     if (usedNumbers.length === 19) {
                         console.log("All numbers have been used.");
                         return null; // All numbers between 0 and 17 have been used
@@ -855,6 +1075,21 @@ $(document).ready(function(){
       $('.marker').off('click');  
       $('#exampleModalCenter').modal('toggle');
      
+
+    }
+    function initThirdGame(){
+
+        currentQuestionIndex=0;
+        questions=question2;   
+        flagThridGame=1;
+        loadQuestion();
+
+        $("#spetialLines").find("div").css("display","none");
+        
+        $(".aglines").find(">div").eq(0).css("display","block");
+        $("#angles").find("div").eq(0).css("display","block");
+        $('#exampleModalCenter2').modal('toggle');
+
 
     }
 
