@@ -25,7 +25,7 @@
                     <div>
                باقی‌مانده
                     </div>
-               <span class="badge text-bg-primary" id="wholeAnswer">18</span>
+               <span class="badge text-bg-primary" id="wholeAnswer">16</span>
             </div> 
                 <div class="col" >
                     <div>
@@ -109,8 +109,8 @@
             <div class="marker marker14" data-tooltip="Anterior Nasal Spine (ANS)"></div>
             <div class="marker marker15" data-tooltip="A point"></div>
             <div class="marker marker16" data-tooltip="PT point"></div>
-            <div class="marker marker17" data-tooltip="Upper Lip (UL)"></div>
-            <div class="marker marker18" data-tooltip="Lower Lip (LL)"></div>
+            <!-- <div class="marker marker17" data-tooltip="Upper Lip (UL)"></div>
+            <div class="marker marker18" data-tooltip="Lower Lip (LL)"></div> -->
 
 
             <div  id="spetialLines">
@@ -146,13 +146,19 @@
                         <div class="line line13"  data-line="FMIA"></div>
                         <div class="line line15"  data-line="FMIA"></div>
                  </div>
+                 <div class="aglines4" style="display: none;"> 
+                    <div class="line line13"  data-line="FMIA"></div>
+                    <div class="line line16"  data-line="FMIA"></div>
+                </div>
+
                 </div>
                 
                 <div id="angles">
                 <div class="angle angle3" style="display: none;"></div>
                 <div class="angle angle1" style="display: none;"></div>
-
                 <div class="angle angle2" style="display: none;"></div>
+                <div class="angle angle4" style="display: none;"></div>
+
                 </div>
 
                </div>
@@ -190,7 +196,7 @@
                     .line4{
                         top: 44.3%;
                         left: 45.3%;
-                        width: 49.3%;
+                        width: 44.3%;
                         transform: rotate(19.3deg);
                     }
 
@@ -263,6 +269,12 @@
                     width: 105.3%;
                     transform: rotate(209deg)
                     }
+                    .line16{
+                        top: 78%;
+                        left: 89.5%;
+                        width: 60.3%;
+                        transform: rotate(241deg);
+                    }
                  .angle {
                     width: 0;
                     height: 0;
@@ -299,7 +311,78 @@
                         border-top: 34px solid #4397ff;
                     }
 
-                    
+                    .angle.angle4{
+                       
+                        width: 30px;
+                        height: 30px;
+                        background-color: #4CAF50;
+                        transform: rotate(270deg);
+                        top: 35%;
+                        right: 30%;
+                        border-radius: 127% 0px 0% 0%;
+                    }
+                    .angle.angle4::before{
+                        content: "";
+                        width: 0;
+                        height: 0;
+                        border-top: 17px solid #4CAF50;
+                        border-right: 30px solid transparent;
+                        position: absolute;
+                        top: 30px;
+                        right: 0px;
+                   }
+                  
+                    @media only screen and (max-width: 480px) {
+
+                        .angle.angle3 {
+                            top: 76%;
+                            right: 19%;
+                            transform: rotate(0deg);
+                            border-left: 37px solid transparent;
+                            border-right: 8px solid transparent;
+                            border-top: 19px solid #4397ff;
+                        }
+                        .angle.angle1 {
+                            top: 35%;
+                            right: 7.1%;
+                            transform: rotate(0deg);
+                            border-left: 22px solid transparent;
+                            border-right: 12px solid transparent;
+                            border-top: 25px solid #4397ff;
+                            border-top: 29px solid #4397ff;
+                        }
+                        .angle.angle2 {
+                            top: 35.4%;
+                            right: 77.1%;
+                            transform: rotate(0deg);
+                            border-left: 42px solid transparent;
+                            border-right: 4px solid transparent;
+                            border-top: 22px solid #4397ff;
+                        }
+                        .angle.angle4{
+                       
+                       width: 30px;
+                       height: 30px;
+                       background-color: #4CAF50;
+                       transform: rotate(270deg);
+                       top: 35%;
+                       right: 30%;
+                       border-radius: 127% 0px 0% 0%;
+                   }
+                   .angle.angle4::before{
+                    content: "";
+                    width: 0;
+                    height: 0;
+                    border-top: 18px solid #4CAF50;
+                    border-right: 30px solid transparent;
+                    position: absolute;
+                    top: 29px;
+                    right: 0px;
+                  }
+
+                    }
+
+                
             </style>
             
 
@@ -528,7 +611,7 @@
                     selectedOption.addClass('incorrect');
                   }
 
-                  if( flagThridGame==1 && currentQuestionIndex==2)
+                  if( flagThridGame==1 && currentQuestionIndex==3)
                     { alert("آزمون تمام شد!");
                                 return;
                         }
@@ -544,7 +627,7 @@
                 
                 currentQuestionIndex++;
                 if(flagThridGame==1){
-                    if(currentQuestionIndex==3){
+                    if(currentQuestionIndex==4){
                         alert("آزمون تمام شد!");
                         return;
                     }
@@ -560,7 +643,7 @@
                 $("#angles").find(" div").css("display","none");
                 $("#angles").find("div").eq(currentQuestionIndex).css("display","block");
 
-                if (currentQuestionIndex < 3) {
+                if (currentQuestionIndex < 4) {
                   loadQuestion();
                   $('#nextBtn').hide();
                 } else {
@@ -734,13 +817,13 @@
 
         .marker {
             position: absolute;
-    background-color: #56b0f9;
-    border-radius: 50%;
-    width: 12px;
-    height: 12px;
-    cursor: pointer;
-    border: 2px solid #812222;
-    z-index: 6;
+            background-color: #56b0f9;
+            border-radius: 50%;
+            width: 12px;
+            height: 12px;
+            cursor: pointer;
+            border: 2px solid #812222;
+            z-index: 6;
         }
 
         /* Example markers */
@@ -908,18 +991,18 @@ $(document).ready(function(){
 
           nextMarker();
         
-        $('.marker').on('mouseenter', function() {
+        // $('.marker').on('mouseenter', function() {
 
-            const tooltipText = $(this).data('tooltip');
-            $('#tooltip-sp').text(tooltipText).css({
-                top: $(this).position().top - 30,
-                left: $(this).position().left + 20
-            }).fadeIn();
-        });
+        //     const tooltipText = $(this).data('tooltip');
+        //     $('#tooltip-sp').text(tooltipText).css({
+        //         top: $(this).position().top - 30,
+        //         left: $(this).position().left + 20
+        //     }).fadeIn();
+        // });
 
-        $('.marker').on('mouseleave', function() {
-            $('#tooltip-sp').fadeOut();
-        });
+        // $('.marker').on('mouseleave', function() {
+        //     $('#tooltip-sp').fadeOut();
+        // });
       var possibleWrongAnswer=0;
       $('.marker').on('click', function(e) {
          
@@ -979,8 +1062,6 @@ $(document).ready(function(){
             
             $("#audioWrong")[0].play();
            if(possibleWrongAnswer < 4){
-            
-            
             if(possibleWrongAnswer==3){  
                 $('.marker').each( function() {
                     const tooltipText = $(this).data('tooltip');
@@ -1034,8 +1115,8 @@ $(document).ready(function(){
 
 
     const pointMark=['Porion (P)','Bolton (Bo)','Sella Turcica (S)','Condylion (Co)','Gonion (Go)','Posterior Nasal Spine (PNS)',
-            ,"B-point", "Pogonion (Pog)","Gnathion (Gn)","Menton (Me)","Basion (Ba)","Nasion (Na)","Orbitale (Or)",
-            'Anterior Nasal Spine (ANS)','A point','PT point','Upper Lip (UL)','Lower Lip (LL)'
+           'B-point', 'Pogonion (Pog)','Gnathion (Gn)','Menton (Me)','Basion (Ba)','Nasion (Na)','Orbitale (Or)',
+            'Anterior Nasal Spine (ANS)','A point','PT point'
             ];
 
 
@@ -1043,15 +1124,15 @@ $(document).ready(function(){
             let usedNumbers = [];
 
                 function getRandomUniqueNumber() {
-                    
-                    if (usedNumbers.length === 19) {
+                    debugger
+                    if (usedNumbers.length === 17) {
                         console.log("All numbers have been used.");
                         return null; // All numbers between 0 and 17 have been used
                     }
 
                     let randomNumber;
                     do {
-                        randomNumber = Math.floor(Math.random() * 19);  // Generate a number between 0 and 17
+                        randomNumber = Math.floor(Math.random() * 17);  // Generate a number between 0 and 17
                     } while (usedNumbers.includes(randomNumber));  // Keep generating if the number has already been used
 
                     usedNumbers.push(randomNumber);  // Add the new number to the usedNumbers array
