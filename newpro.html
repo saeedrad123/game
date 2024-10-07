@@ -18,6 +18,8 @@
         <div class="row">
 
 
+
+
           <div class="col-md">
             <div class="alert alert-light" role="alert">
                 <div class="d-flex flex-row align-content-around">
@@ -81,6 +83,10 @@
           </div>
           
         </div>
+        <div class="" style="display: flex; justify-content: center; align-items: center;flex-direction: column;">
+        <div class="coin" id="coin"></div>
+        <div class=""  id="trueAnswer1" style="text-align: center;  font-weight: 700; color: #e7b245;font-size: 19px;">0</div>
+      </div>
         <div style="text-align: center;">
             <audio id="audioCorrect">
                 <source src="assets/voice/correct.mp3" type="audio/mpeg">
@@ -422,7 +428,45 @@
             #nextBtn {
               display: none; /* مخفی کردن دکمه سوال بعدی تا وقتی جواب داده شود */
             }
+            
           </style>
+           <style>
+            .coin {
+                width: 100px;
+                height: 100px;
+                background-image: url('coin.png'); /* Replace with the path to your PNG coin image */
+                background-size: cover;
+                display: inline-block;
+                animation: none; /* No animation by default */
+            }
+    
+            /* Define keyframes for the animation with flash */
+            @keyframes coin-animation {
+                0% {
+                    transform: scale(1) rotateY(0deg) translateY(0);
+                    opacity: 1;
+                }
+                25% {
+                    opacity: 0.5; /* Flash effect */
+                }
+                50% {
+                    transform: scale(1.2) rotateY(180deg) translateY(-20px);
+                    opacity: 1; /* Restore visibility */
+                }
+                75% {
+                    opacity: 0.5; /* Flash effect again */
+                }
+                100% {
+                    transform: scale(1) rotateY(360deg) translateY(0);
+                    opacity: 1;
+                }
+            }
+    
+            /* Trigger the animation when the coin is clicked or shown */
+            .coin.animate {
+                animation: coin-animation 1s ease-in-out forwards;
+            }
+        </style>
         <div class="container mt-4" id="secondGame" style="display: none;">
             <!-- سوال -->
             <div class="card">
@@ -610,8 +654,15 @@
                   if (!isCorrect) {
                     selectedOption.addClass('incorrect');
                   }
+                  if(isCorrect){
+
+                    var trueAnswer= parseInt($.trim($("#trueAnswer1").text()));
+                        $("#trueAnswer1").text(trueAnswer+1);
+                  }
 
                   if( flagThridGame==1 && currentQuestionIndex==3)
+
+                  
                     { alert("آزمون تمام شد!");
                                 return;
                         }
@@ -662,6 +713,19 @@
                   loadQuestion();
                   $('#nextBtn').hide();
                 } else {
+                    debugger
+                    var trueAnswer= parseInt($.trim($("#trueAnswer1").text()));
+                    if(trueAnswer >5){
+                        
+                        $(".notAllowToThirdGame").css("display","none");
+                        $(".allowToThirdGame").css("display","block");
+
+
+                    }
+                   else{
+                    $(".notAllowToThirdGame").css("display","block");
+                    $(".allowToThirdGame").css("display","none");
+                   }
                     $('#exampleModalCenter2').modal('toggle');
 
 
@@ -705,7 +769,9 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
               <div class="modal-content">
                 <div class="modal-header">
+                    
                   <h5 class="modal-title" id="exampleModalLongTitle">بازی به اتمام رسید</h5>
+                 
                   <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button> -->
@@ -713,7 +779,10 @@
                 <div class="modal-body">
                     <div class="alert alert-light" role="alert">
                         <div class="d-flex flex-row align-content-around">
-                  
+                            <div class="notAllowToSecondGame">
+                                <h5 class="modal-title" id="exampleModalLongTitle">   شما سکه‌های کافی برای بازی دوم بدست نیاورید دوباره تلاش کنید.</h5>
+            
+                              </div>
                         <div class="col" >
                             <div>
                             درست 
@@ -731,7 +800,13 @@
                 </div>
                 <div class="modal-footer">
                   <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+                    <div class="notAllowToSecondGame">
+                        <button type="button" class="btn btn-primary" onclick="location.reload()">بازی دوباره </button>
+
+                    </div>
+                  <div class="allowToSecondGame">
                   <button type="button" class="btn btn-primary" onclick="initSecondGame()">بازی دوم</button>
+                </div>
                 </div>
               </div>
             </div>
@@ -752,6 +827,10 @@
                     <div class="alert alert-light" role="alert">
                         <div class="d-flex flex-row align-content-around">
                             بازی دوم به پایان رسید.
+
+                            <div class="notAllowToThirdGame">
+                                شما تعداد سکه لازم برای ورود به بازی سوم را بدست نیاوید دوباره تلاش کنید!
+                            </div>
                         <!-- <div class="col" >
                             <div>
                             درست 
@@ -769,7 +848,13 @@
                 </div>
                 <div class="modal-footer">
                   <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
-                  <button type="button" class="btn btn-primary" onclick="initThirdGame()">بازی سوم</button>
+                   <div class="notAllowToThirdGame">
+                    <button type="button" class="btn btn-primary" onclick="location.reload()">بازی دوباره</button>
+
+                   </div>
+                   <div class="allowToThirdGame">
+                     <button type="button" class="btn btn-primary" onclick="initThirdGame()">بازی سوم</button>
+                      </div>
                 </div>
               </div>
             </div>
@@ -1040,6 +1125,19 @@ $(document).ready(function(){
             });
             var trueAnswer= parseInt($.trim($("#trueAnswer").text()));
             $("#trueAnswer").text(trueAnswer+1);
+            $("#trueAnswer1").text(trueAnswer+1);
+
+
+            const coin = document.getElementById('coin');
+
+            coin.classList.add('animate');
+            
+            // Remove the animation class after it's done so it can be triggered again
+            setTimeout(() => {
+                coin.classList.remove('animate');
+            }, 1000); // Duration matches the animation time
+
+
         }
             if(parseInt( $("#wholeAnswer").text()) >0 )
             $("#wholeAnswer").text(wholeAnswer -1);
@@ -1101,7 +1199,20 @@ $(document).ready(function(){
             ).text());
             $("#finalTrueAnswer").text($("#trueAnswer"
             ).text());
+           var trueAnswer= parseInt($.trim($("#trueAnswer1").text()));
+            if(trueAnswer >6) //change the coin number to start the second game
+                {
+
+                   $(".allowToSecondGame").css("display","block");
+                   $(".notAllowToSecondGame").css("display","none");
+                    $('#exampleModalCenter').modal('toggle');
+                }
+                else{
+                    $(".allowToSecondGame").css("display","none");
+                    $(".notAllowToSecondGame").css("display","block");
             $('#exampleModalCenter').modal('toggle');
+                }
+
 
             
          }
@@ -1124,7 +1235,7 @@ $(document).ready(function(){
             let usedNumbers = [];
 
                 function getRandomUniqueNumber() {
-                    debugger
+                    
                     if (usedNumbers.length === 17) {
                         console.log("All numbers have been used.");
                         return null; // All numbers between 0 and 17 have been used
@@ -1155,6 +1266,8 @@ $(document).ready(function(){
       $(".marker").css({"backgroundColor":"#56b0f9"});
       $('.marker').off('click');  
       $('#exampleModalCenter').modal('toggle');
+      $("#trueAnswer1").text("0");
+
      
 
     }
@@ -1170,6 +1283,8 @@ $(document).ready(function(){
         $(".aglines").find(">div").eq(0).css("display","block");
         $("#angles").find("div").eq(0).css("display","block");
         $('#exampleModalCenter2').modal('toggle');
+        $("#trueAnswer1").text("0");
+
 
 
     }
