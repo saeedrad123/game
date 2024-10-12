@@ -12,8 +12,148 @@
     <script src="assets/javascript/bootstrap.min.js" ></script>
 </head>
 <body>
+
+
+
     <div class="container">
- 
+        <div id="game-area">
+
+        <div id="celebration-screen">
+            <div class="confetti" aria-hidden="true">
+              <!-- Individual confetti pieces -->
+              <div class="confetti-piece"></div>
+              <div class="confetti-piece"></div>
+              <div class="confetti-piece"></div>
+              <div class="confetti-piece"></div>
+              <div class="confetti-piece"></div>
+              <div class="confetti-piece"></div>
+            </div>
+            <h1 class="celebrate-text">شما به مرحله بعد راه یافتید 🎉</h1>
+
+            </div>
+            </div>
+
+
+
+
+
+
+            <style>
+             
+              
+           
+              
+              #celebration-screen {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.8);
+                color: white;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                z-index: 10000;
+              }
+              
+              .celebrate-text {
+                font-size: 4em;
+                animation: bounce 2s infinite;
+                color: yellow;
+              }
+              
+              button {
+                padding: 10px 20px;
+                font-size: 16px;
+                cursor: pointer;
+                background-color: #ffcc00;
+                border: none;
+                border-radius: 5px;
+              }
+              
+              .confetti {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                pointer-events: none;
+                z-index: -1;
+              }
+              
+              .confetti-piece {
+                position: absolute;
+                top: -10px;
+                width: 15px;
+                height: 15px;
+                background-color: #ffcc00;
+                animation: fall 3s ease-in-out infinite;
+                opacity: 0;
+              }
+              
+              /* Different colors and sizes for the confetti */
+              .confetti-piece:nth-child(2n) { background-color: #ff6f61; }
+              .confetti-piece:nth-child(3n) { background-color: #61dafb; }
+              .confetti-piece:nth-child(4n) { background-color: #ffcc99; }
+              .confetti-piece:nth-child(5n) { background-color: #32cd32; }
+              .confetti-piece:nth-child(6n) { background-color: #ff69b4; }
+              
+              @keyframes fall {
+                0% { transform: scale(0); opacity: 1; top: 50vh; left: 50vw; }
+                25% { transform: scale(1); }
+                100% { 
+                  transform: translateY(100vh) rotate(720deg);
+                  opacity: 0;
+                  top: 0;
+                  left: calc(50vw + (rand(-50, 50)) * 1px); 
+                }
+              }
+              
+              @keyframes bounce {
+                0%, 100% { transform: translateY(0); }
+                50% { transform: translateY(-30px); }
+              }
+              
+              </style>
+              
+              <script>
+            
+                // $('#stage-clear-btn').click(function() {
+                //   // Show celebration screen
+                //   $('#game-area').hide();
+                //   $('#celebration-screen').fadeIn();
+                //   triggerConfetti();
+                // });
+              
+               
+              
+                function triggerConfetti() {
+                  // Randomly animate confetti pieces
+                  $('.confetti-piece').each(function(index) {
+                    var leftPosition = Math.random() * 100 + 'vw';
+                    var delay = Math.random() * 2 + 's';
+                    $(this).css({
+                      'left': leftPosition,
+                      'animation-delay': delay
+                    }).addClass('animate');
+                  });
+                }
+              
+                function stopConfetti() {
+                  // Reset confetti animation
+                  $('.confetti-piece').removeClass('animate').css({
+                    'top': '-10px',
+                    'opacity': '0'
+                  });
+                }
+       
+              $('#celebration-screen').css("display","none");
+             
+                  stopConfetti();
+              </script>
 
         <div class="row">
 
@@ -95,6 +235,11 @@
                 <source src="assets/voice/wrong.mp3" type="audio/mpeg">
               </audio>
 
+              <audio id="winStage">
+                <source src="assets/voice/winstage.wav" type="audio/mpeg">
+              </audio>
+            
+
         <div class="container-sp" style="margin: 0 auto;">
             <img src="./assets/image/0nZXNeqUpLJ.png" alt="Sample Image">
             
@@ -168,6 +313,9 @@
                 </div>
 
                </div>
+
+
+               
             <style>
                 .line {
                     position: absolute;
@@ -647,6 +795,9 @@
               loadQuestion();
               $('#submitBtn').click(function() {
                 const selectedOption = $('input[name="option"]:checked');
+                $(this).prop('disabled', true);
+
+
         
                 if (selectedOption.length > 0) {
                   const isCorrect = selectedOption.val() === "true";
@@ -658,6 +809,21 @@
 
                     var trueAnswer= parseInt($.trim($("#trueAnswer1").text()));
                         $("#trueAnswer1").text(trueAnswer+1);
+                        $("#trueAnswer").text(trueAnswer+1);
+                    var wholeAnswer=parseInt($.trim($("#wholeAnswer").text()));
+                    $("#wholeAnswer").text(wholeAnswer-1);
+                    $("#audioCorrect")[0].play();
+
+
+
+                  }
+                  else{
+                    var falseAnswer= parseInt($.trim($("#falseAnswer").text()));
+                        $("#falseAnswer").text(falseAnswer+1);
+                    var wholeAnswer=parseInt($.trim($("#wholeAnswer").text()));
+                    $("#wholeAnswer").text(wholeAnswer-1);
+                    $("#audioWrong")[0].play();
+
                   }
 
                   if( flagThridGame==1 && currentQuestionIndex==3)
@@ -675,7 +841,8 @@
         
               $('#nextBtn').click(function() {
 
-                
+               $("#submitBtn").prop('disabled', false);
+
                 currentQuestionIndex++;
                 if(flagThridGame==1){
                     if(currentQuestionIndex==4){
@@ -719,6 +886,11 @@
                         
                         $(".notAllowToThirdGame").css("display","none");
                         $(".allowToThirdGame").css("display","block");
+                        $("winStage")[0].play();
+                        $('#celebration-screen').fadeIn().delay(3000).fadeOut();
+                      
+                        
+
 
 
                     }
@@ -780,7 +952,7 @@
                     <div class="alert alert-light" role="alert">
                         <div class="d-flex flex-row align-content-around">
                             <div class="notAllowToSecondGame">
-                                <h5 class="modal-title" id="exampleModalLongTitle">   شما سکه‌های کافی برای بازی دوم بدست نیاورید دوباره تلاش کنید.</h5>
+                                <h5 class="modal-title" id="exampleModalLongTitle">   شما سکه‌های کافی برای بازی دوم را کسب نکردید دوباره تلاش کنید.</h5>
             
                               </div>
                         <div class="col" >
@@ -829,7 +1001,7 @@
                             بازی دوم به پایان رسید.
 
                             <div class="notAllowToThirdGame">
-                                شما تعداد سکه لازم برای ورود به بازی سوم را بدست نیاوید دوباره تلاش کنید!
+                                شما تعداد سکه لازم برای ورود به بازی سوم را کسب نکردید دوباره تلاش کنید!
                             </div>
                         <!-- <div class="col" >
                             <div>
@@ -1206,6 +1378,9 @@ $(document).ready(function(){
                    $(".allowToSecondGame").css("display","block");
                    $(".notAllowToSecondGame").css("display","none");
                     $('#exampleModalCenter').modal('toggle');
+                    $("winStage")[0].play();
+                    $('#celebration-screen').fadeIn().delay(3000).fadeOut();
+
                 }
                 else{
                     $(".allowToSecondGame").css("display","none");
@@ -1267,7 +1442,14 @@ $(document).ready(function(){
       $('.marker').off('click');  
       $('#exampleModalCenter').modal('toggle');
       $("#trueAnswer1").text("0");
+       $("#wholeAnswer").text("13"); 
+       $("#trueAnswer").text("0");
+       $("#falseAnswer").text("0");
 
+       
+
+
+       
      
 
     }
@@ -1284,8 +1466,9 @@ $(document).ready(function(){
         $("#angles").find("div").eq(0).css("display","block");
         $('#exampleModalCenter2').modal('toggle');
         $("#trueAnswer1").text("0");
-
-
+                $("#wholeAnswer").text("4"); 
+            $("#trueAnswer").text("0");
+            $("#falseAnswer").text("0");
 
     }
 
