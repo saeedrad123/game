@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dental ejucation</title>
+
+    <link href="assets/css/bootstrap.rtl.css" rel="stylesheet" />
+    <link href="assets/css/mystyle.css" rel="stylesheet" />
+    <script src="assets/javascript/jquery-3.7.1.min.js" ></script>
+    <script src="assets/javascript/bootstrap.min.js" ></script>
+</head>
+<style>
+  body {
+      background-color: #f8f9fa;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      /* height: 100vh; */
+  }
+  .card {
+      max-width: 650px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      padding: 2rem;
+  }
+  .card-header {
+      background-color: #007bff;
+      color: white;
+      text-align: center;
+      border-radius: 8px 8px 0 0;
+  }
+  .form-check-label {
+      font-weight: normal;
+  }
+  .btn-primary {
+      background-color: #007bff;
+      border-color: #007bff;
+      width: 100%;
+      padding: 0.8rem;
+      font-size: 1.1rem;
+  }
+  .btn-primary:hover {
+      background-color: #0056b3;
+      border-color: #0056b3;
+  }
+  .font-weight-bold{
+    font-weight: 700;
+  }
+  .imgHolder{
+    position: relative;
+  }
+  img{
+    width: 100%;
+  }
+  .marker {
+    position: absolute;
+    background-color: #ff5656;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    border: 2px solid #ffffff;
+    z-index: 6;
+    text-align: center;
+    color: #fff;
+    line-height: 23px;
+    font-weight: 700;
+    font-size: 22px;
+        }
+
+        /* Example markers */
+        .marker1 {
+            top: 31.5%;
+            left: 72.1%;
+        }
+
+       .marker2 {
+        top: 42%;
+        left: 60%;
+        }
+        .marker3 {
+            top: 49%;
+            left: 40%;
+        }
+
+        .line {
+                    position: absolute;
+                    height: 9px;
+                    background-color: #ff5656;
+                    transform-origin: left center;
+                    border: 1px solid #908abf;
+                    z-index: 2;
+                    }
+
+                 
+                    .line2{
+                        top: 34%;
+                        left: 41%;
+                        width: 37.3%;
+                        transform: rotate(0deg);
+                    }
+                    .line10{
+                        top: 28%;
+                        left: 53%;
+                        width: 53.3%;
+                        transform: rotate(53.8deg);
+                    }
+
+
+
+                    .line13{
+                        top: 34%;
+                        left: 98.5%;
+                        width: 99.3%;
+                        transform: rotate(180deg);
+                    }
+                    .line14{
+                        top: 25%;
+                        left: 95.5%;
+                        width: 53.3%;
+                        transform: rotate(110deg);
+                    }
+                    .line15{
+                    top: 92%;
+                    left: 91.5%;
+                    width: 105.3%;
+                    transform: rotate(209deg)
+                    }
+                    .line16{
+                        top: 78%;
+                        left: 89.5%;
+                        width: 60.3%;
+                        transform: rotate(241deg);
+                    }
+                    .line17{
+                      top: 79%;
+                      left: 85.6%;
+                      width: 49.3%;
+                      transform: rotate(267deg);
+                    }
+                    .line18{
+                      top: 34%;
+                      left: 89.5%;
+                      width: 60.3%;
+                      transform: rotate(180deg);
+                    }
+                    .line19{
+                      top: 84%;
+                      left: 85.5%;
+                      width: 55.3%;
+                      transform: rotate(233.5deg);
+                    }
+                 .angle {
+                    width: 0;
+                    height: 0;
+                 
+                    position: absolute;
+                    z-index: 2;
+                    font-weight: 700;
+                    color: #fff;
+                    line-height: 33px;
+                    font-size: 18px;
+                    text-align: center;
+                
+
+                    }
+                   .angle.angle1{
+                    
+                    top: 35%;
+                    right: 7.1%;
+                    transform: rotate(0deg);
+                    border-left: 23px solid transparent;
+                    border-right: 15px solid transparent;
+                    border-top: 35px solid #4CAF50;
+                    }
+                    .angle.angle2{
+                        top: 35%;
+                        right: 81.1%;
+                        transform: rotate(0deg);
+                        border-left: 43px solid transparent;
+                        border-right: 5px solid transparent;
+                        border-top: 23px solid #4CAF50;
+                    }
+                    .angle.angle6{
+                      top: 35.2%;
+                      right: 35%;
+                      transform: rotate(0deg);
+                      border-left: 43px solid transparent;
+                      border-right: 4px solid transparent;
+                      border-top: 55px solid #4CAF50;
+                    }
+                    .angle.angle3{
+                        top: 76%;
+                        right: 19%;
+                        transform: rotate(0deg);
+                        border-left: 59px solid transparent;
+                        border-right: 14px solid transparent;
+                        border-top: 34px solid #4CAF50;
+                    }
+
+                    .angle.angle4{
+                       
+                        width: 30px;
+                        height: 30px;
+                        background-color: #4CAF50;
+                        transform: rotate(270deg);
+                        top: 35%;
+                        right: 30%;
+                        border-radius: 127% 0px 0% 0%;
+                    }
+
+                    .angle.angle5{
+                      width: 30px;
+                      height: 30px;
+                      background-color: #4CAF50;
+                      transform: rotate(267deg);
+                      top: 35%;
+                      right: 16.3%;
+                      border-radius: 105% 0px 0% 0%;
+                    }
+                    .angle.angle4::before{
+                        content: "";
+                        width: 0;
+                        height: 0;
+                        border-top: 17px solid #4CAF50;
+                        border-right: 30px solid transparent;
+                        position: absolute;
+                        top: 30px;
+                        right: 0px;
+                   }
+                  
+                    @media only screen and (max-width: 480px) {
+
+                        .angle.angle3 {
+                            top: 76%;
+                            right: 19%;
+                            transform: rotate(0deg);
+                            border-left: 37px solid transparent;
+                            border-right: 8px solid transparent;
+                            border-top: 19px solid #4CAF50;
+                        }
+                        .angle.angle1 {
+                            top: 35%;
+                            right: 7.1%;
+                            transform: rotate(0deg);
+                            border-left: 22px solid transparent;
+                            border-right: 12px solid transparent;
+                            border-top: 25px solid #4CAF50;
+                            border-top: 29px solid #4CAF50;
+                        }
+                        .angle.angle2 {
+                            top: 35.4%;
+                            right: 77.1%;
+                            transform: rotate(0deg);
+                            border-left: 42px solid transparent;
+                            border-right: 4px solid transparent;
+                            border-top: 22px solid #4CAF50;
+                        }
+
+                     
+                        
+                     .angle.angle4{
+                       width: 30px;
+                       height: 30px;
+                       background-color: #4CAF50;
+                       transform: rotate(270deg);
+                       top: 35%;
+                       right: 30%;
+                       border-radius: 127% 0px 0% 0%;
+                   }
+                   .angle.angle4::before{
+                    content: "";
+                    width: 0;
+                    height: 0;
+                    border-top: 18px solid #4CAF50;
+                    border-right: 30px solid transparent;
+                    position: absolute;
+                    top: 29px;
+                    right: 0px;
+                  }
+                  .angle.angle7{
+                    top: 35%;
+                        right: 81.1%;
+                        transform: rotate(0deg);
+                        border-left: 43px solid transparent;
+                        border-right: 5px solid transparent;
+                        border-top: 23px solid #4CAF50;
+                    }
+                    .angle.angle6{
+                      top: 35.4%;
+                      right: 35%;
+                      transform: rotate(0deg);
+                      border-left: 29px solid transparent;
+                      border-right: 4px solid transparent;
+                      border-top: 38px solid #47d12e;
+    
+                    }
+                  }
+
+                
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="card-header">
+      <h2>آزمون چهار گزینه‌ای</h2>
+  </div>
+  <div class="card-body">
+
+      <form id="quizForm">
+          <!-- سوال برای نام کاربر -->
+          <div class="form-group">
+              <label for="name" class="font-weight-bold">نام خود را وارد کنید:</label>
+              <input type="text" class="form-control" id="name" name="name" required>
+          </div>
+          <h6 class="my-2">دانشجوی گرامی با سلام و احترام لطفا در ارتباط با کلیشه لترال سفالومتری که در اختیار شما قرار داده شده است به سوالات زیر پاسخ دهید:</h6>
+
+          <!-- سوالات چند گزینه‌ای -->
+          <!-- سوال 1 نمونه، می‌توانید بقیه سوالات را به همین شکل اضافه کنید -->
+          <div class="question form-group">
+              <label class="font-weight-bold"> 1: 	عدد 2 در تصویر نشان دهنده ی کدام لندمارک سفالومتری می باشد؟</label>
+            <div class="imgHolder">
+              <img src="assets/image/0nZXNeqUpLJ.png" />
+              <div class="marker marker1">2</div>
+            </div>
+              <div class="form-check">
+                  <input class="form-check-input" type="radio" name="q1" value="گزینه 1" required>
+                  <label class="form-check-label">Sella</label>
+              </div>
+              <div class="form-check">
+                  <input class="form-check-input" type="radio" name="q1" value="گزینه 2" required>
+                  <label class="form-check-label">Orbitale </label>
+              </div>
+              <div class="form-check">
+                  <input class="form-check-input" type="radio" name="q1" value="گزینه 3" required>
+                  <label class="form-check-label">Porion </label>
+              </div>
+              <div class="form-check">
+                  <input class="form-check-input" type="radio" name="q1" value="گزینه 4" required>
+                  <label class="form-check-label">Pogonion </label>
+              </div>
+          </div>
+          <div class="question form-group">
+            <label class="font-weight-bold">2-	کدام یک از موارد زیر نقطه Gnathion (Gn) را به درستی تعریف کرده است؟</label>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="q2" value="گزینه 1" required>
+                <label class="form-check-label">قدامي ترين نقطه سمفيز يا چانه ي استخواني</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="q2" value="گزینه 2" required>
+                <label class="form-check-label">تحتاني ترين نقطه روي سمفيز منديبل </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="q2" value="گزینه 3" required>
+                <label class="form-check-label">محل طلاقي بوردر خلفي راموس و بوردر تحتاني منديبل </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="q2" value="گزینه 4" required>
+                <label class="form-check-label">قدامي تحتاني ترين نقطه ي سمفيز منديبل </label>
+            </div>
+        </div>
+        <div class="question form-group">
+            
+          <label class="font-weight-bold"> 3- عدد 6 در تصویر نشان دهنده ی نقطه ........ می باشد.</label>
+          <div class="imgHolder">
+          <img src="assets/image/0nZXNeqUpLJ.png" />
+              <div class="marker marker2">6</div>
+            </div>
+          <div class="form-check">
+              <input class="form-check-input" type="radio" name="q3" value="گزینه 1" required>
+              <label class="form-check-label">PNS </label>
+          </div>
+          <div class="form-check">
+              <input class="form-check-input" type="radio" name="q3" value="گزینه 2" required>
+              <label class="form-check-label">PT </label>
+          </div>
+          <div class="form-check">
+              <input class="form-check-input" type="radio" name="q3" value="گزینه 3" required>
+              <label class="form-check-label">ANS  </label>
+          </div>
+          <div class="form-check">
+              <input class="form-check-input" type="radio" name="q3" value="گزینه 4" required>
+              <label class="form-check-label">Na  </label>
+          </div>
+      </div>
+      <div class="question form-group">
+            
+        <label class="font-weight-bold">  4- به عمیق ترین نقطه تقعر موجود در بوردر قدامي ماگزيلا در حدود جلوي ريشه ي اينسيزور ، نقطه ........ گفته می شود.</label>
+   
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="q4" value="گزینه 1" required>
+            <label class="form-check-label">B  </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="q4" value="گزینه 2" required>
+            <label class="form-check-label">ANS </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="q4" value="گزینه 3" required>
+            <label class="form-check-label">A   </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="q4" value="گزینه 4" required>
+            <label class="form-check-label">Bo   </label>
+        </div>
+    </div>
+    <div class="question form-group">
+            
+        <label class="font-weight-bold"> 5- عدد 5 در تصویر نشان دهنده ی نقطه ............. می باشد..</label>
+        <div class="imgHolder">
+        <img src="assets/image/0nZXNeqUpLJ.png" />
+            <div class="marker marker3">5</div>
+          </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="q5" value="گزینه 1" required>
+            <label class="form-check-label">Ba  </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="q5" value="گزینه 2" required>
+            <label class="form-check-label">Co </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="q5" value="گزینه 3" required>
+            <label class="form-check-label">Po  </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="q5" value="گزینه 4" required>
+            <label class="form-check-label">Bo  </label>
+        </div>
+    </div>
+
+   
+    <h6 class="my-2">
+        لطفا در دومین کلیشه لترال سفالومتری که در اختیار شما قرار داده شده است، به سوالات زیر پاسخ دهید:
+    </h6>
+    <div class="question form-group">
+        <label class="font-weight-bold">6-  خط نشان دهنده ی کدام یک از پلان های زیر می باشد؟</label>
+
+        <div class="imgHolder">
+            <img src="assets/image/0nZXNeqUpLJ.png" />
+            <div class="line line2"></div>
+          </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="q6" value="گزینه 1" required>
+            <label class="form-check-label">mandibular plan</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="q6" value="گزینه 2" required>
+            <label class="form-check-label">Frankfort plan</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="q6" value="گزینه 3" required>
+            <label class="form-check-label">Palatal plan</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="q6" value="گزینه 4" required>
+            <label class="form-check-label">SN </label>
+        </div>
+    </div>
+    <div class="question form-group">
+        <label class="font-weight-bold">7-  نقاط تشکیل دهنده پلان پالاتال کدام است؟</label>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="q7" value="گزینه 1" required>
+            <label class="form-check-label">Po-Or</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="q7" value="گزینه 2" required>
+            <label class="form-check-label">Sella-Nasion</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="q7" value="گزینه 3" required>
+            <label class="form-check-label">ANS-PNS</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="q7" value="گزینه 4" required>
+            <label class="form-check-label">Go-Gn  </label>
+        </div>
+    </div>
+    <div class="question form-group">
+        <label class="font-weight-bold">8-  خط نشان دهنده ی پلان ........... می باشد؟</label>
+
+        <div class="imgHolder">
+            <img src="assets/image/0nZXNeqUpLJ.png" />
+            <div class="line line10"></div>
+          </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="q8" value="گزینه 1" required>
+            <label class="form-check-label">N-perpendicular</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="q8" value="گزینه 2" required>
+            <label class="form-check-label">ANS- Me </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="q8" value="گزینه 3" required>
+            <label class="form-check-label">Facial Plan </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="q8" value="گزینه 4" required>
+            <label class="form-check-label">S-GN  </label>
+        </div>
+    </div>
+    <div class="question form-group">
+            
+        <label class="font-weight-bold"> 9- Facial Planاز چه نقاطی تشکیل شده است؟</label>
+
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="q9" value="گزینه 1" required>
+            <label class="form-check-label">N- Pog  </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="q9" value="گزینه 2" required>
+            <label class="form-check-label">N-Me </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="q9" value="گزینه 3" required>
+            <label class="form-check-label">ANS-Me  </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="q9" value="گزینه 4" required>
+            <label class="form-check-label">N-B   </label>
+        </div>
+    </div>
+<h6 class="my-2">لطفا در سومین کلیشه لترال سفالومتری که در اختیار شما قرار داده شده است، به سوالات زیر پاسخ دهید:</h6>
+
+<div class="question form-group">
+    <label class="font-weight-bold">10- عدد 4 نشان دهنده کدام یک از زوایای زیر می باشد؟</label>
+
+    <div class="imgHolder">
+        <img src="assets/image/0nZXNeqUpLJ.png" />
+        <div class="anglesLines">
+            <div class="aglines">
+    
+         
+            <div class="aglines5" > 
+              <div class="line line17"  data-line="FMIA"></div>
+              <div class="line line18"  data-line="FMIA" ></div>
+          </div>
+       
+
+            </div>
+            
+            <div id="angles">
+   
+            <div class="angle angle5" >4</div>
+ 
+          </div>
+
+           </div>
+
+
+           
+
+      </div>
+    <div class="form-check">
+        <input class="form-check-input" type="radio" name="q10" value="گزینه 1" required>
+        <label class="form-check-label">N-perpendicular</label>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" type="radio" name="q10" value="گزینه 2" required>
+        <label class="form-check-label">ANS- Me </label>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" type="radio" name="q10" value="گزینه 3" required>
+        <label class="form-check-label">Facial Plan </label>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" type="radio" name="q10" value="گزینه 4" required>
+        <label class="form-check-label">S-GN  </label>
+    </div>
+</div>
+
+
+
+<div class="question form-group">
+    <label class="font-weight-bold">11-کدام یک از زوایای زیر نشان دهنده IMPA می باشد؟</label>
+
+    <div class="imgHolder">
+        <img src="assets/image/0nZXNeqUpLJ.png" />
+        <div class="anglesLines">
+            <div class="aglines">
+                <div class="aglines1" > 
+                    <div class="line line14"  data-line="FMIA"></div>
+                    <div class="line line15"  data-line="FMIA"></div>
+                    </div>
+
+                    <div class="aglines2" > 
+                        <div class="line line13"  data-line="FMIA"></div>
+                           <div class="line line14"  data-line="FMIA"></div>
+                       </div>
+                       <div class="aglines3" > 
+                               <div class="line line13"  data-line="FMIA"></div>
+                               <div class="line line15"  data-line="FMIA"></div>
+                        </div>
+         
+            <div class="aglines5" > 
+              <div class="line line17"  data-line="FMIA"></div>
+              <div class="line line18"  data-line="FMIA" ></div>
+          </div>
+       
+
+            </div>
+            
+            <div id="angles">
+                <div class="angle angle3" >
+                    <span style="display: inline-block;position: absolute;top: -36px;right: 5px;">2</span></div>
+                <div class="angle angle1" > <span style="display: inline-block;position: absolute;top: -38px;right: -3px;">3</span></div>
+                <div class="angle angle2" > <span style="display: inline-block;position: absolute;top: -31px;right: 5px;">1</span></div>
+            <div class="angle angle5" >4</div>
+ 
+          </div>
+
+           </div>
+
+
+           
+
+      </div>
+    <div class="form-check">
+        <input class="form-check-input" type="radio" name="q11" value="گزینه 1" required>
+        <label class="form-check-label">1</label>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" type="radio" name="q11" value="گزینه 2" required>
+        <label class="form-check-label">2</label>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" type="radio" name="q11" value="گزینه 3" required>
+        <label class="form-check-label">3 </label>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" type="radio" name="q11" value="گزینه 4" required>
+        <label class="form-check-label">4  </label>
+    </div>
+</div>
+
+
+
+<div class="question form-group">
+    <label class="font-weight-bold">12- کدام یک از اعداد نشان دهنده زاویه Y-Axis می باشد؟ </label>
+
+    <div class="imgHolder">
+        <img src="assets/image/0nZXNeqUpLJ.png" />
+        <div class="anglesLines">
+            <div class="aglines">
+                <div class="aglines1" > 
+                    <div class="line line14"  data-line="FMIA"></div>
+                    <div class="line line15"  data-line="FMIA"></div>
+                    </div>
+
+                    <div class="aglines2" > 
+                        <div class="line line13"  data-line="FMIA"></div>
+                           <div class="line line14"  data-line="FMIA"></div>
+                       </div>
+                       <div class="aglines3" > 
+                               <div class="line line13"  data-line="FMIA"></div>
+                               <div class="line line15"  data-line="FMIA"></div>
+                        </div>
+         
+                        <div class="aglines6" > 
+                            <div class="line line18"  data-line="FMIA"></div>
+                            <div class="line line19"  data-line="FMIA"></div>
+                        </div>
+       
+
+            </div>
+            
+            <div id="angles">
+                <div class="angle angle3" >
+                    <span style="display: inline-block;position: absolute;top: -36px;right: 5px;">5</span></div>
+                <div class="angle angle1" > <span style="display: inline-block;position: absolute;top: -38px;right: -3px;">3</span></div>
+                <div class="angle angle2" > <span style="display: inline-block;position: absolute;top: -31px;right: 5px;">1</span></div>
+            <div class="angle angle6" ><span style="display: inline-block;position: absolute;top: -51px;right: 5px;">6</span></div>
+ 
+          </div>
+
+           </div>
+      </div>
+    <div class="form-check">
+        <input class="form-check-input" type="radio" name="q12" value="گزینه 1" required>
+        <label class="form-check-label">5</label>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" type="radio" name="q12" value="گزینه 2" required>
+        <label class="form-check-label">3</label>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" type="radio" name="q12" value="گزینه 3" required>
+        <label class="form-check-label">6 </label>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" type="radio" name="q12" value="گزینه 4" required>
+        <label class="form-check-label">1  </label>
+    </div>
+</div>
+
+          <!-- دکمه ارسال -->
+          <button type="submit" class="btn btn-primary mt-4">پایان آزمون</button>
+      </form>
+  </div>
+</div>
+
+<!-- لینک‌های جی‌کوئری و بوت‌استرپ جاوااسکریپت -->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+
+<!-- اسکریپت برای بررسی اجباری بودن پاسخ به همه سوالات -->
+<script>
+  $(document).ready(function () {
+      $('#quizForm').on('submit', function (e) {
+          e.preventDefault();
+
+          // بررسی اینکه همه سوالات پاسخ داده شده‌اند
+          var allAnswered = true;
+          $('input[type="radio"]').each(function () {
+              var name = $(this).attr('name');
+              if (!$('input[name="' + name + '"]:checked').length) {
+                  allAnswered = false;
+                  return false; // توقف حلقه
+              }
+          });
+
+          if (!allAnswered) {
+              alert("لطفاً به تمام سوالات پاسخ دهید.");
+              return;
+          }
+
+          // ارسال فرم
+          this.submit();
+      });
+  });
+</script>
+
+
+
+
+</body>
+</html>
